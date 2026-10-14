@@ -22,8 +22,8 @@ export const author: AuthorProfile = {
 };
 
 export const professor = {
-  monogram: 'D',
-  name: 'Prof. Denis',
+  monogram: 'DS',
+  name: 'Prof. Denis Lucas Silva',
   subject: 'Análise e Projeto Orientado a Objetos',
   note: 'Universidade Tecnológica Federal do Paraná - UTFPR · Campus Guarapuava. Avaliação de suficiência por estudo de caso, em notação UML.',
 };
