@@ -470,7 +470,7 @@ export const classDiagram: ClassDiagramModel = {
       id: 'origina',
       kind: 'association',
       from: { element: 'PropostaComercial', side: 'bottom', at: 0.5, multiplicity: '1' },
-      to: { element: 'Agendamento', side: 'top', at: 0.5, multiplicity: '0..1' },
+      to: { element: 'Agendamento', side: 'top', at: 0.513, multiplicity: '0..1' },
       label: 'origina ▾',
       description: 'Só a proposta aceita gera agendamento, por isso 0..1.',
     },
