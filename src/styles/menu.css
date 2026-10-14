@@ -1,0 +1,286 @@
+/* ===== Cover page ===== */
+.menu {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 48px 24px 60px;
+  overflow: hidden;
+}
+
+.menu > * { position: relative; }
+
+/*
+ * Animated backdrop. The glows are plain gradients on one oversized layer and the orbit is made of
+ * bordered circles: both move only with transforms, so nothing is repainted while they animate.
+ */
+.menu-backdrop { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+.menu-glow {
+  position: absolute;
+  inset: -120px;
+  background:
+    radial-gradient(620px 420px at 12% 8%, rgba(245, 176, 37, 0.17), transparent 70%),
+    radial-gradient(700px 460px at 88% 10%, rgba(91, 61, 245, 0.26), transparent 70%),
+    radial-gradient(760px 420px at 55% 62%, rgba(20, 184, 166, 0.09), transparent 70%);
+}
+
+.menu-orbit { position: absolute; top: 310px; left: 50%; width: 0; height: 0; }
+
+.orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  will-change: transform;
+  animation: spin 80s linear infinite;
+}
+
+.orbit-ring i { position: absolute; width: 7px; height: 7px; margin: -4px; border-radius: 50%; background: var(--accent); opacity: 0.4; }
+.orbit-ring i:nth-child(1) { top: 0; left: 50%; }
+.orbit-ring i:nth-child(2) { top: 50%; left: 100%; background: var(--indigo); }
+.orbit-ring i:nth-child(3) { top: 100%; left: 50%; background: var(--teal); }
+.ring-large { width: 640px; height: 640px; margin: -320px; animation-duration: 120s; }
+.ring-medium { width: 520px; height: 520px; margin: -260px; animation-duration: 70s; animation-direction: reverse; }
+.ring-small { width: 340px; height: 340px; margin: -170px; animation-duration: 46s; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.menu-header { text-align: center; max-width: 800px; animation: rise-in 0.7s var(--ease) both; }
+
+.institution-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: #ffffff;
+  padding: 8px 18px 8px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  margin-bottom: 18px;
+}
+
+.logo-utfpr { height: 34px; width: auto; display: block; }
+.logo-tsi { height: 30px; width: auto; display: block; object-fit: contain; }
+.institution-divider { width: 1px; height: 28px; background: #cbd5e1; }
+.institution-names { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+.institution-university { font-size: 13px; font-weight: 800; color: #0f172a; letter-spacing: 0.02em; }
+.institution-campus { font-size: 11.5px; font-weight: 700; color: #b45309; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.menu-seal {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 12px;
+  background: rgba(11, 12, 17, 0.5);
+}
+
+.menu-header h1 {
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1.05;
+  margin: 16px 0 14px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, var(--yellow), #ff8a3d 55%, var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.menu-header p { color: var(--text-mid); margin: 0; font-size: 16.5px; text-wrap: pretty; }
+.menu-header p b { color: var(--text); }
+.menu-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.menu-buttons .primary-button, .menu-buttons .secondary-button { padding: 12px 20px; font-size: 15px; }
+
+.overall-progress { width: min(520px, 100%); margin: 26px auto 0; }
+.overall-labels { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-soft); margin-bottom: 6px; }
+.overall-labels b { color: var(--text); }
+
+/* ===== Units and topic cards ===== */
+.unit { width: min(1040px, 100%); display: flex; flex-direction: column; gap: 16px; }
+
+.unit-header { display: flex; align-items: flex-start; gap: 16px; }
+
+.unit-number {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-top: 2px;
+}
+
+.unit-header h2 { margin: 0; font-size: 18px; line-height: 1.3; }
+.unit-header p { margin: 3px 0 0; font-size: 13.5px; color: var(--text-soft); }
+
+.menu-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+
+.card {
+  --card-color: var(--accent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 22px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease), border-color 0.2s, box-shadow 0.25s;
+  animation: rise-in 0.6s var(--ease) both;
+  animation-delay: calc(0.15s + var(--i) * 0.07s);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--card-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -110px;
+  top: -130px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--card-color), transparent);
+  opacity: 0.1;
+  transition: opacity 0.3s;
+}
+
+.card:hover { transform: translateY(-5px); border-color: var(--card-color); box-shadow: 0 22px 50px -24px var(--card-color); }
+.card:hover::before { transform: scaleX(1); }
+.card:hover::after { opacity: 0.26; }
+.card:hover .card-icon { transform: scale(1.12) rotate(-6deg); }
+
+.card-number { position: absolute; top: 18px; right: 22px; font-family: var(--font-code); color: var(--text-soft); font-size: 14px; }
+.card-icon { font-size: 38px; line-height: 1; margin-bottom: 6px; width: fit-content; transition: transform 0.3s var(--ease); }
+.card h3 { margin: 0; font-size: 20px; line-height: 1.25; color: var(--card-color); }
+.card p { margin: 4px 0 10px; font-size: 14px; color: var(--text-mid); flex: 1; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+.card-tags code { font-size: 12px; color: var(--text); }
+.card-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
+.card-ring { display: inline-flex; align-items: center; gap: 10px; }
+.card-ring small { font-size: 12.5px; color: var(--text-soft); }
+.card-open { font-weight: 700; color: var(--card-color); font-size: 14px; white-space: nowrap; }
+
+.ring { width: 44px; height: 44px; }
+.ring circle { fill: none; stroke-width: 4; }
+.ring-track { stroke: var(--surface-3); }
+.ring-value { stroke: var(--card-color); stroke-linecap: round; transform: rotate(-90deg); transform-origin: 22px 22px; transition: stroke-dashoffset 0.8s var(--ease); }
+.ring text { fill: var(--text); font-size: 11px; font-weight: 700; }
+
+.menu-how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: min(1040px, 100%); }
+.menu-how div { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--text-mid); }
+.menu-how div > b { flex-shrink: 0; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); }
+.menu-how span b { color: var(--text); }
+
+/* ===== Student + professor ===== */
+.people { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 22px; width: min(1040px, 100%); }
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 26px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.author-photo {
+  width: 112px;
+  height: 112px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--surface-2);
+  box-shadow: 0 0 0 2px var(--accent), 0 0 0 5px color-mix(in srgb, var(--indigo) 60%, transparent);
+}
+
+.author-data { min-width: 0; }
+.author-caption { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
+.author h2 { margin: 2px 0 2px; font-size: 24px; letter-spacing: -0.01em; }
+.author-role { margin: 0; color: var(--green); font-weight: 600; font-size: 14px; }
+.author-about { margin: 8px 0 12px; color: var(--text-mid); font-size: 14px; }
+.author-links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.author-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.author-link svg { width: 15px; height: 15px; }
+.author-link:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+.professor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 22px 24px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.professor h2 { margin: 2px 0 4px; font-size: 19px; line-height: 1.25; }
+.professor-subject { margin: 0; color: var(--purple); font-weight: 600; font-size: 14px; }
+.professor-note { margin: 4px 0 0; color: var(--text-mid); font-size: 13px; }
+
+.professor-monogram {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--accent-ink);
+  background: linear-gradient(135deg, var(--yellow), var(--pink) 55%, var(--indigo));
+}
+
+@media (max-width: 960px) {
+  .people { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .menu-cards, .menu-how { grid-template-columns: minmax(0, 1fr); }
+  .unit-header { flex-direction: column; gap: 8px; }
+}
+
+@media (max-width: 640px) {
+  .institution-box { flex-direction: column; gap: 8px; padding: 10px 14px; }
+  .institution-divider { display: none; }
+  .institution-names { text-align: center; }
+  .author { flex-direction: column; text-align: center; }
+  .author-links { justify-content: center; }
+}

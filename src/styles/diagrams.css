@@ -1,0 +1,80 @@
+/* ===== UML diagrams (SVG) ===== */
+.uml {
+  display: block;
+  font-family: var(--font-code);
+  font-variant-ligatures: none;
+  --line: #9aa3bd;
+  --shape: #1b1f2b;
+  --shape-stroke: #7d87a6;
+  --ink: #e8ebf4;
+  --ink-soft: #a3abc2;
+  --hot: var(--accent);
+}
+
+.uml text { fill: var(--ink); font-size: 12px; }
+.uml .uml-line { stroke: var(--line); stroke-width: 1.4; fill: none; }
+.uml .uml-dashed { stroke-dasharray: 6 5; }
+.uml .uml-shape { fill: var(--shape); stroke: var(--shape-stroke); stroke-width: 1.4; }
+.uml .uml-solid { fill: var(--ink); }
+.uml .marker-open { fill: none; stroke: var(--line); stroke-width: 1.4; }
+.uml .marker-filled { fill: var(--line); }
+.uml .uml-label { font-family: var(--font); font-size: 12.5px; }
+.uml .uml-strong { font-weight: 700; }
+.uml .uml-id { font-size: 10.5px; fill: var(--hot); font-weight: 700; letter-spacing: 0.06em; }
+.uml .uml-stereotype { font-size: 11px; fill: var(--ink-soft); font-style: italic; }
+.uml .uml-guard { font-size: 11px; fill: #ffd27a; }
+.uml .uml-boundary { fill: rgba(255, 255, 255, 0.02); stroke: var(--shape-stroke); stroke-width: 1.4; }
+.uml .uml-boundary-title { font-family: var(--font); font-size: 15px; font-weight: 800; }
+.uml .uml-frame { fill: none; stroke: var(--shape-stroke); stroke-width: 1.2; }
+.uml .uml-frame-tab { fill: var(--surface-2); stroke: var(--shape-stroke); stroke-width: 1.2; }
+.uml .uml-frame-title { font-size: 12px; font-weight: 700; }
+
+/* Class diagram */
+.uml .uml-class-name { font-size: 13px; font-weight: 800; }
+.uml .uml-member-text { font-size: 12px; fill: var(--ink-soft); }
+.uml .uml-derived { font-style: italic; }
+.uml .uml-member-hit { fill: transparent; }
+.uml .uml-multiplicity { font-size: 12px; font-weight: 700; fill: #ffd27a; }
+.uml .uml-role { font-size: 11px; fill: var(--ink-soft); }
+.uml .uml-assoc-name { font-size: 11.5px; font-family: var(--font); font-style: italic; fill: var(--ink-soft); }
+.uml .uml-hit { stroke: transparent; stroke-width: 14; fill: none; }
+.uml .uml-control .uml-shape { stroke-dasharray: 5 3; }
+.uml .uml-enumeration .uml-shape { fill: #1a1f2f; }
+
+/* Activity diagram */
+.uml .uml-lane-body { fill: rgba(255, 255, 255, 0.015); stroke: var(--border); }
+.uml .uml-lane-head { fill: var(--surface-2); stroke: var(--border); }
+.uml .uml-lane-title { font-family: var(--font); font-size: 14px; font-weight: 800; }
+.uml .uml-region-box { fill: none; stroke: var(--shape-stroke); stroke-dasharray: 3 4; }
+.uml .uml-node-decision .uml-shape, .uml .uml-node-merge .uml-shape { fill: #232838; }
+.uml .token { fill: var(--hot); stroke: #000; stroke-width: 1; }
+
+/* Sequence diagram */
+.uml .uml-lifeline-name { font-size: 12.5px; font-weight: 700; text-decoration: underline; }
+.uml .uml-activation { fill: #2b3142; stroke: var(--shape-stroke); stroke-width: 1.2; }
+.uml .uml-message { font-size: 12px; }
+.uml .uml-return { fill: var(--ink-soft); }
+.uml .uml-fragment-box { fill: rgba(255, 255, 255, 0.02); stroke: var(--shape-stroke); stroke-width: 1.2; }
+.uml .uml-fragment-kind { font-size: 12px; font-weight: 800; }
+
+/* Interaction states */
+.uml [data-id] { cursor: pointer; }
+.uml .uml-shape, .uml text, .uml .uml-line { transition: stroke 0.2s, fill 0.2s, opacity 0.25s; }
+.uml .is-selected .uml-shape, .uml .is-current .uml-shape { stroke: var(--hot); stroke-width: 2.4; }
+.uml .is-selected .uml-line, .uml .is-current .uml-line { stroke: var(--hot); stroke-width: 2.2; }
+.uml .is-current text { fill: var(--hot); }
+.uml .is-related .uml-shape { stroke: var(--teal); stroke-width: 2; }
+.uml .is-related .uml-line { stroke: var(--teal); stroke-width: 2; }
+.uml .is-done .uml-line { stroke: var(--green); }
+.uml .is-done .uml-shape { stroke: var(--green); }
+.uml .is-muted { opacity: 0.22; }
+.uml .uml-member.is-selected text { fill: var(--hot); font-weight: 700; }
+.uml .uml-member.is-related text { fill: var(--teal); font-weight: 700; }
+
+/* Labels drawn over lines get a halo in the background color, so crossings stay readable. */
+.uml .uml-message, .uml .uml-guard, .uml .uml-multiplicity, .uml .uml-assoc-name, .uml .uml-stereotype, .uml .uml-role {
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}

@@ -1,0 +1,120 @@
+import type { UseCaseDiagramModel } from '../../model/uml';
+
+/** Diagrama de casos de uso: fronteira do subsistema avaliado. */
+export const useCaseDiagram: UseCaseDiagramModel = {
+  systemName: 'Sistema Integrado de Gestão Veicular',
+  width: 1160,
+  height: 860,
+  boundary: { x: 170, y: 20, width: 830, height: 820 },
+  actors: [
+    {
+      id: 'owner',
+      name: 'Proprietário',
+      description: 'Dono de um ou mais veículos. Mantém o histórico, abre solicitações e escolhe a proposta.',
+      x: 70,
+      y: 440,
+    },
+    {
+      id: 'partner',
+      name: 'Empresa Parceira',
+      description:
+        'Oficina, concessionária, centro de estética ou borracharia cadastrada. Recebe os chamados compatíveis, disputa com propostas e também pode registrar manutenções que executou.',
+      x: 1080,
+      y: 460,
+    },
+  ],
+  useCases: [
+    {
+      id: 'UC01',
+      name: 'Manter Veículos',
+      summary: 'Cadastrar o veículo (placa, modelo, ano, combustível, quilometragem) e atualizar seus dados e a quilometragem.',
+      x: 300,
+      y: 100,
+      actors: ['owner'],
+    },
+    {
+      id: 'UC02',
+      name: 'Registrar Manutenção',
+      summary:
+        'Registrar uma manutenção preventiva ou corretiva: data, quilometragem, itens (peças trocadas e serviços), valor e oficina executora. Feito pelo proprietário ou pela própria oficina.',
+      x: 640,
+      y: 270,
+      actors: ['owner', 'partner'],
+    },
+    {
+      id: 'UC03',
+      name: 'Consultar Linha do Tempo',
+      summary: 'Ver o histórico mecânico do veículo em ordem cronológica.',
+      x: 380,
+      y: 230,
+      actors: ['owner'],
+    },
+    {
+      id: 'UC04',
+      name: 'Abrir Solicitação de Serviço',
+      summary: 'Descrever a demanda (revisão programada ou problema) e o tipo de serviço para um veículo. A solicitação nasce ABERTA.',
+      x: 300,
+      y: 690,
+      actors: ['owner'],
+    },
+    {
+      id: 'UC05',
+      name: 'Identificar Empresas Compatíveis',
+      summary: 'O sistema seleciona as empresas que atendem a região do proprietário e têm a especialidade pedida, e as avisa.',
+      x: 300,
+      y: 800,
+      actors: [],
+    },
+    {
+      id: 'UC06',
+      name: 'Consultar Solicitações Compatíveis',
+      summary: 'A empresa vê, no seu painel, os chamados abertos da sua região e especialidade.',
+      x: 840,
+      y: 180,
+      actors: ['partner'],
+    },
+    {
+      id: 'UC07',
+      name: 'Enviar Proposta Comercial',
+      summary: 'A empresa envia o orçamento: mão de obra, peças, prazo de execução e validade da oferta.',
+      x: 860,
+      y: 660,
+      actors: ['partner'],
+    },
+    {
+      id: 'UC08',
+      name: 'Analisar e Aceitar Proposta',
+      summary: 'O proprietário compara as propostas no painel e aceita uma; o leilão é encerrado para as demais. Fluxo crítico, especificado em detalhe.',
+      x: 560,
+      y: 420,
+      actors: ['owner'],
+      secondaryActors: ['partner'],
+    },
+    {
+      id: 'UC09',
+      name: 'Gerar Agendamento',
+      summary: 'Conversão automática da proposta aceita em agendamento oficial (AGENDADO) e aviso à empresa vencedora.',
+      x: 610,
+      y: 600,
+      actors: [],
+    },
+    {
+      id: 'UC10',
+      name: 'Cancelar Solicitação',
+      summary: 'Nenhuma proposta atende: o proprietário cancela a solicitação e todas as propostas são recusadas.',
+      x: 360,
+      y: 560,
+      actors: ['owner'],
+    },
+  ],
+  relations: [
+    { kind: 'include', from: 'UC04', to: 'UC05', note: 'Toda solicitação aberta precisa ser distribuída às empresas compatíveis.' },
+    { kind: 'include', from: 'UC08', to: 'UC09', note: 'Todo aceite gera, obrigatoriamente, o agendamento (passo 9 do UC08).' },
+    {
+      kind: 'extend',
+      from: 'UC10',
+      to: 'UC08',
+      note: 'Ponto de extensão "nenhuma proposta atende" (passo 3 do UC08): o proprietário pode, opcionalmente, cancelar.',
+    },
+  ],
+};
